@@ -24,14 +24,14 @@ public class BtTimer extends JLabel{
 
 	private Integer int_minute, int_second;
 	// Pomodoro - minutes
-	private Integer default_timer_size = 25; // mins
+	private Integer default_timer_size = 45; // mins
 	public Timer timer;
 	private Boolean is_running = false;
-	private JFrame top_frame;
+	private MainFrame top_frame;
 //	private String default_page_title;
 //	private String str_minute, str_second;
 
-	public BtTimer(JFrame frame){
+	public BtTimer(MainFrame frame){
 
 		// This will enable us to access frame object , for example to change title of JFrame...
 		top_frame = frame;
@@ -52,6 +52,10 @@ public class BtTimer extends JLabel{
 		});
 		timer.start(); 
 		setFont(new Font(null, Font.BOLD, 38));
+	}
+
+	private Integer getTimerSize(){
+		return top_frame.getTimerSize() > 0 ? top_frame.getTimerSize() : default_timer_size;
 	}
 
 	private void update_number(){
@@ -94,27 +98,26 @@ public class BtTimer extends JLabel{
 	public void restart(){
 		
 		if(is_running == false){
-//			top_frame.setTitle(default_page_title);
 			is_running = true;
 		} else {
-			int_minute = default_timer_size;
+			// int_minute = default_timer_size;
+			int_minute = getTimerSize();
 			int_second = 0;
 			draw_timer();
 			is_running = false;
 		}
-//		echo("Restarting");
 	} 
 
-	public void set_timer_size(Integer mins){
-		default_timer_size = mins; // set default timer which is being used while restarting...
+	// public void set_timer_size(Integer mins){
+	// 	default_timer_size = mins; // set default timer which is being used while restarting...
 
-		// Reset current timer values
-		int_minute = mins;
-		int_second = 0;
+	// 	// Reset current timer values
+	// 	int_minute = mins;
+	// 	int_second = 0;
 
-		is_running = false; // stop timer
-		draw_timer(); // draw timer again
-	}
+	// 	is_running = false; // stop timer
+	// 	draw_timer(); // draw timer again
+	// }
 
 	/**
 	* Make title of frame equal to timer values

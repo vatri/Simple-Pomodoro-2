@@ -10,9 +10,13 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JTextField;
+
 public class MainFrame extends JFrame{
 
 	private BtTimer bt_timer;
+
+    private  JTextField timerSize = new JTextField(3);
 
 	public MainFrame()
 	{
@@ -43,6 +47,11 @@ panel.setOpaque(false); // ??
         bt_timer = new BtTimer(this);
         panel.add(bt_timer, c);
 
+        // timerSize = new JTextField();
+
+        c.gridy++;
+        panel.add(timerSize, c);
+
         bt_timer.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent e){  
                 bt_timer.restart();
@@ -51,4 +60,13 @@ panel.setOpaque(false); // ??
 
         pack();
 	}
+
+    public Integer getTimerSize(){
+        String v = this.timerSize.getText();
+        Integer res = 0;
+        if( ! v.equals("")){
+            res = Integer.parseInt(v);
+        }
+        return res;
+    }
 }
